@@ -4,3 +4,5 @@ www.crontab.cn
 www.online.com
 admin.online.com
 www.walle.com
+admin.caseresult.cn
+www.caseresult.cn
