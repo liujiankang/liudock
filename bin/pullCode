@@ -1,0 +1,14 @@
+#!/bin/bash
+
+binDir=`dirname $0`
+
+while read line
+do
+	project=`echo $line | cut -d " " -f1`
+	repository=`echo $line | cut -d " " -f2`
+
+	if [ ! -d "$binDir/../webCode/$project" ]; then
+    		git clone $repository "$binDir/../webCode/$project"
+	fi
+done < $binDir/conf/repositories.txt
+

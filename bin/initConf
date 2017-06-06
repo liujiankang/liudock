@@ -1,0 +1,15 @@
+#!/bin/bash
+
+binDir=`dirname $0`
+echo 'copy file'
+
+if [ -d "$binDir/../configs" ]; then
+
+    for confDir in `ls "$binDir/../configs"`;
+    do
+	    if [ -d "$binDir/../webCode/$confDir" ]; then
+        	cp -r "$binDir/../configs/$confDir" "$binDir/../webCode"
+	    fi
+    done
+fi
+

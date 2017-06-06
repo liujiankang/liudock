@@ -1,0 +1,12 @@
+#!/bin/bash
+
+binDir=`dirname $0`
+hasImage=`docker images wcgtool -q`
+
+cd "$binDir/../"
+
+if [ "$hasImage" == "" ]; then
+	docker build -t wcgtool "build/wcgtool"
+fi
+
+docker run --rm -it -v `pwd`/webCode:/webCode -v ~/.ssh:/root/.ssh -v ~/.gitconfig:/root/.gitconfig wcgtool /bin/bash

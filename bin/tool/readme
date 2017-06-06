@@ -1,0 +1,5 @@
+when user composer install yii2 framwork ;
+first instal follow
+fxp/composer-asset-plugin
+php composer.phar global require "fxp/composer-asset-plugin:1.4.0"
+

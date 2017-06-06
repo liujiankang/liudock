@@ -1,0 +1,18 @@
+#!/bin/bash
+
+binDir=`dirname $0`
+hasImage=`docker images wcgtool -q`
+
+cd "$binDir/../"
+
+if [ "$hasImage" == "" ]; then
+	docker build -t wcgtool "build/wcgtool"
+fi
+
+
+if [ "$1" == "" ]; then
+	echo "Usage: wcomposer some-path composer-sub-command"
+	exit 1
+fi
+
+docker run --rm -it -v `pwd`/webCode:/webCode -v ~/.ssh:/root/.ssh -v ~/.gitconfig:/root/.gitconfig wcgtool /bin/bash -c "cd $1 && composer ${*#$1}"

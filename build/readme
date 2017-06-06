@@ -1,0 +1,1 @@
+sudo docker build -t 'ubunt16base:liu1' ./build/ubunt16basetool

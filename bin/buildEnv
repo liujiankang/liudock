@@ -1,0 +1,13 @@
+#!/bin/bash
+
+binDir=`dirname $0`
+
+echo "start building ..."
+
+cd "$binDir/../"
+
+if [ `uname -s | grep -i nt` ]; then
+	docker-compose up --build -d
+else
+	sudo -b docker-compose up --build -d
+fi

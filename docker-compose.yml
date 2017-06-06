@@ -1,0 +1,70 @@
+services:
+  nginx.liu:
+    build: build/nginx
+    ports:
+      - 81:80
+    networks:
+      default:
+        aliases:
+          - www.online.liu
+          - admin.online.liu
+          - app.wcg.com
+          - www.wcg.com
+    links:
+      - php7.liu
+      - mysql.liu
+      - redis.liu
+      - mongo.liu
+      - postgre.liu
+    volumes:
+      - ./webCode:/webCode
+      - ./logs/nginx:/var/log/nginx
+  php7.liu:
+    build: build/php7fpm
+    networks:
+      - default
+    links:
+      - mysql.liu
+      - redis.liu
+    volumes:
+      - ./webCode:/webCode
+      - ./logs/php7fpm:/var/log/phpfpm
+  redis.liu:
+    build: build/redis
+    networks:
+      - default
+    volumes:
+      - ./logs/redis:/var/log/redis
+  mysql.liu:
+    build: build/mysql
+    networks:
+      - default
+    ports:
+      - 3306:3306
+    volumes:
+      - ./logs/mysql:/var/log/mysql
+  mongo.liu:
+    build: build/mongo
+    networks:
+      - default
+    ports:
+      - 27017:27017
+      - 27018:27018
+      - 27019:27019
+    volumes:
+      - ./logs/mongo:/var/log/mongo
+      - ./database/mongo:/data/db
+      - ./database/mongoBackup:/dbBackup
+      - ./database/leanote/dbBackup:/leanote
+  postgre.liu:
+    build: build/mysql
+    networks:
+      - default
+    ports:
+      - 5432:5432
+    volumes:
+      - ./logs/postgre:/var/log/postgre
+networks:
+  default:
+    driver: bridge
+version: '2'

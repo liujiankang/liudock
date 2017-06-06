@@ -1,0 +1,19 @@
+#!/bin/bash
+
+binDir=`dirname $0`
+
+if [ `uname -s | grep -i nt` ]; then
+    hostFile="/c/Windows/System32/drivers/etc/hosts"
+else
+    hostFile="/etc/hosts"
+fi
+
+for host in `cat $binDir/conf/hosts.txt`
+do
+    search=`awk '{print $2}' /etc/hosts | grep $host`
+    if [ "$host" != "$search" ]; then
+        echo "127.0.0.1    $host" >> $hostFile
+    fi
+
+done
+

@@ -1,0 +1,19 @@
+#!/bin/bash
+
+binDir=`dirname $0`
+
+case "$1" in
+    start)
+            cd "$binDir/../" && sudo docker-compose start
+        ;;
+    stop)
+            cd "$binDir/../" && sudo docker-compose stop
+        ;;
+    restart)
+            cd "$binDir/../" && sudo docker-compose restart
+        ;;
+    *)
+            echo "Usage: webServe {start|stop|restart}"
+            exit 1
+        ;;
+esac
