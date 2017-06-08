@@ -6,4 +6,5 @@ RUN apt-get -y install nginx
 ADD etc/nginx/nginx.conf /etc/nginx/nginx.conf
 ADD etc/nginx/conf.d /etc/nginx/conf.d
 EXPOSE 80
+EXPOSE 81
 CMD nginx
